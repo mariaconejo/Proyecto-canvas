@@ -24,7 +24,7 @@ function resizeCanvas() {
 // funcion que calcula la distancia de dos puntos que serian las pupilas con el mouse
 // math.pow son para potencias
 function distanceBetweenPoints(a, b) {
-  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
+    return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
 }
 
 // https://www.superprof.es/apuntes/escolar/matematicas/analitica/vectores/vector-unitario.html
