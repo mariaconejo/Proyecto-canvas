@@ -45,16 +45,18 @@ function moveEyes() {
         },
         {
             x: canvas().width / 2 + 75, // le suma porque es el ojo derecho
+
             y: canvas().height / 2 - 15,
         }
 ];
    // le aplica a todo el elemento la funcion position y permite que la pupila pueda moverse dentro y fuera del ojo
-    const eyePositions = eyesPositions.map(Position);
+    const eyePositions = eyesPositions.map(position);
 
     eyePositions.forEach((element) => {
         ctx().drawImage(eyesImage,
-                    element.x - eyesImage.width / 2,
-                    element.y - eyesImage.height / 2);
+            element.x - eyesImage.width / 2,
+            element.y - eyesImage.height / 2
+        );
     });
 }
 
