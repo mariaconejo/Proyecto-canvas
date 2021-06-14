@@ -1,39 +1,30 @@
-import{clearCanvas, resizeCanvas, mousePosition}from './modules/util.js';
-import Face from './modules/clases.js';
-import Mask from './modules/clases.js';
-import {drawEyes} from './modules/clases.js';
+import { clearCanvas, mousePosition } from './modules/util.js';
+import { Face, Mask, moveEyes } from './modules/clases.js';
 
+const imageFace = 'https://i.ibb.co/CVfPFkm/sin-eyes.png'; // se puede cambiar la imagen
+const imageMask = 'https://i.ibb.co/DGLwq0N/mascara.png';
+const face = new Face(imageFace);
+const mask = new Mask(imageMask);
 
-let imageFace = 'https://i.ibb.co/CVfPFkm/sin-eyes.png';
-let imageMask = 'https://i.ibb.co/DGLwq0N/mascara.png';
-
-let face = new Face(imageFace)
-let mask = new Mask(imageMask)
-
-function render() {
-    clearCanvas();
-    face.draw();
-    drawEyes()
-    mask.draw();
-    
+// Union de las 3 partes en una sola DEBE ESTAR EN ESE ORDEN SI NO NO VA VER LOS OJOS MOVERSE
+function joinDrawings() {
+  clearCanvas();
+  face.draw();
+  moveEyes();
+  mask.draw();
 }
 
-function onResize() {
-    resizeCanvas();
-    render();
+// Funcion que logra que las pupilas sigan al mouse dependiendo de la posicion en x y y del mouse la posicion inicial es
+// (0,0) se actuliza con .offsetX y .offsetY
+function eyesMoveMouse(event) {
+  mousePosition.x = event.offsetX;
+  mousePosition.y = event.offsetY;
+  joinDrawings();
 }
-
-function onMouseMove(event) {
-    mousePosition.x = event.offsetX;
-    mousePosition.y = event.offsetY;
-    render();
-}
-
 
 function main() {
-    resizeCanvas();
-    render();
-    window.addEventListener('resize', onResize);
-    window.addEventListener('mousemove', onMouseMove);
+  joinDrawings();
+  window.addEventListener('mousemove', eyesMoveMouse);
 }
-window.addEventListener('load', main);
+
+main();
